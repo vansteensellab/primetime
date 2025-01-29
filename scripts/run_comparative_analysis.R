@@ -44,6 +44,7 @@ option_list <- list(
         make_option(c("--contrast_condition"), type = "character", default = NULL, help = "Condition to contrast"),
         make_option(c("--reference_condition"), type = "character", default = NULL, help = "Condition to contrast"),
         make_option(c("--corrected_activity"), type = "character", default = NULL, help = "Path to the corrected activity file"),
+        make_option(c("--plot_output"), type = "character", default = NULL, help = "Path to the output directory for the plots"),
         # flag to tell wheter to make a single model for all the TFs or not
         make_option(c("--single_model"), type = "logical", default = FALSE, help = "Whether to make a single model for all the TFs or not")
 )
@@ -382,7 +383,7 @@ mpranalyze_result %>%
 ##########################################################################################
 p_threshold <- opt$pval_threshold
 message(paste0("==== Applying signifficance thresholds: fdr <= ", p_threshold, "\n"))
-pdf(file.path(opt$output, "MPRAnalyze_volcano.pdf"), width = 10, height = 10)
+pdf(file.path(opt$plot_output, "primetime_volcano.pdf"), width = 10, height = 10)
 
 # mpranalyze_result %>%
 #         head() %>%
@@ -429,4 +430,4 @@ parsed_results %>%
 invisible(dev.off())
 
 parsed_results %>%
-        write.table(file.path(opt$output, "MPRAnalyze_results.txt"), sep = "\t", quote = FALSE, row.names = FALSE)
+        write.table(file.path(opt$plot_output, "primetime_results.txt"), sep = "\t", quote = FALSE, row.names = FALSE)

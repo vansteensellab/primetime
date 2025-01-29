@@ -48,6 +48,10 @@ option_list <- list(
     make_option(c('--contrast_condition'),
         type = 'character', default = 'treated',
         help = 'Contrast condition for the MA plot'
+    ),
+    make_option(c('--plot_output'),
+        type = 'character', default = NULL,
+        help = 'Path to the output directory'
     )
 )
 opt <- parse_args(OptionParser(option_list = option_list))
@@ -58,7 +62,7 @@ aux_df = read.table(opt$corrected_activity, header = T) %>%
     select(tf, negative_control) %>%
     as_tibble()
 pdf(
-    file = file.path(opt$output, "primetime_results_lollipop.pdf"),
+    file = file.path(opt$plot_output, "primetime_lollipop.pdf"),
     width = 21, height = 7
 )
 message("==== Creating lollipop plot")
@@ -97,7 +101,7 @@ print(plot_df)
             geom_point(aes(x = tf, y = ref, color = "C"), size = 3) +
             geom_point(aes(x = tf, y = contrast, color = sig), size = 3) +
             scale_color_manual(values = c('C'= "black", "NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80")) +
-            guides(color = F) +
+            guides(color = "none") +
             theme_bw() +
             theme(
                 axis.text.x = element_text(

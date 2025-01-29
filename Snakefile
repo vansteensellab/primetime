@@ -80,10 +80,10 @@ for sample_name, info in config["INPUT_DATA"].items():
 rule all:
     input:
         #fastqc = os.path.join(output_dir, "reads_QC/multiqc_report.html"),
-        mpra_analyze = os.path.join(output_dir, "MPRAnalyze/MPRAnalyze_results.txt"),
+        mpra_analyze = os.path.join(output_dir, "results/primetime_results.txt"),
         # txt = os.path.join(output_dir, "MPRAnalyze/primetime_results.txt"),
-        plots = os.path.join(output_dir, "MPRAnalyze/primetime_results_lollipop.pdf"),
-        qc = os.path.join(output_dir, "plots/barcode_correlations.pdf"),
+        plots = os.path.join(output_dir, "results/primetime_lollipop.pdf"),
+        qc = os.path.join(output_dir, "qc_plots/barcode_correlations.pdf"),
 
 ################################################################################
 ### HELPER FUNCTIONS ###########################################################
@@ -265,7 +265,7 @@ rule get_activity_and_qc_plots:
         dfs = path_to_annotated_dfs,
         design=os.path.join(output_dir, "design.txt")
     output:
-        plots = os.path.join(output_dir, "plots/barcode_correlations.pdf"),
+        plots = os.path.join(output_dir, "qc_plots/barcode_correlations.pdf"),
         cDNA = os.path.join(output_dir, "MPRAnalyze/cDNA_counts.txt"),
         pDNA = os.path.join(output_dir, "MPRAnalyze/pDNA_counts.txt"),
         activity = os.path.join(output_dir, "MPRAnalyze/activity.txt"),
@@ -273,7 +273,7 @@ rule get_activity_and_qc_plots:
     params:
         script=os.path.join(scripts_dir, "get_activity_and_qc_plots.R"),
         df_basedir=os.path.join(output_dir, "barcode_counts/per_sample"),
-        plots_basedir=os.path.join(output_dir, "plots/"),
+        plots_basedir=os.path.join(output_dir, "qc_plots/"),
         MPRAnalyze_basedir = os.path.join(output_dir, "MPRAnalyze")
     conda:
         os.path.join(conda_envs_dir, "r_plotting.yaml")
@@ -297,12 +297,13 @@ rule run_MPRAnalyze:
         design = os.path.join(output_dir, "design.txt"),
         corrected_activity = os.path.join(output_dir, "MPRAnalyze/corrected_activity.txt")
     output:
-        txt = os.path.join(output_dir, "MPRAnalyze/MPRAnalyze_results.txt"),
-        plots = os.path.join(output_dir, "MPRAnalyze/MPRAnalyze_volcano.pdf")
+        txt = os.path.join(output_dir, "results/primetime_results.txt"),
+        plots = os.path.join(output_dir, "results/primetime_volcano.pdf")
     params:
         script=os.path.join(scripts_dir, "run_comparative_analysis.R"),
         out_basedir=os.path.join(output_dir, "MPRAnalyze"),
         pval_threshold=config["PVALUE_THRESHOLD"],
+        plot_output_dir=os.path.join(output_dir, "results"),
         contrast_condition=config["COMPARATIVE_ANALYSIS"]["CONTRAST_CONDITION"],
         reference_condition=config["COMPARATIVE_ANALYSIS"]["REFERENCE_CONDITION"]
     conda:
@@ -310,6 +311,7 @@ rule run_MPRAnalyze:
     threads: 100
     shell:
         """
+        mkdir -p {params.plot_output_dir}
         # MPRAnalyze with fit.se
         Rscript {params.script} \
         --cdna {input.cDNA} \
@@ -319,20 +321,22 @@ rule run_MPRAnalyze:
         --pval_threshold {params.pval_threshold} \
         --contrast_condition {params.contrast_condition} \
         --reference_condition {params.reference_condition} \
-        --corrected_activity {input.corrected_activity}
+        --corrected_activity {input.corrected_activity} \
+        --plot_output {params.plot_output_dir}
         """
 
 # 6) Merge activity and MPRAnalyze results, and save final results
 rule get_final_results:
     input: 
         corrected_activity = os.path.join(output_dir, "MPRAnalyze/activity.txt"), ###### Note that i changed to the corrected
-        mpra_results = os.path.join(output_dir, "MPRAnalyze/MPRAnalyze_results.txt")
+        mpra_results = os.path.join(output_dir, "results/primetime_results.txt")
     output:
         # txt = os.path.join(output_dir, "MPRAnalyze/primetime_results.txt"),
-        plots = os.path.join(output_dir, "MPRAnalyze/primetime_results_lollipop.pdf")
+        plots = os.path.join(output_dir, "results/primetime_lollipop.pdf")
     params:
         script=os.path.join(scripts_dir, "get_final_results_mpranalyze.R"),
         output_dir = os.path.join(output_dir, "MPRAnalyze"),
+        plot_output_dir = os.path.join(output_dir, "results"),
         design = os.path.join(output_dir, "design.txt"),
         contrast_condition=config["COMPARATIVE_ANALYSIS"]["CONTRAST_CONDITION"],
         reference_condition=config["COMPARATIVE_ANALYSIS"]["REFERENCE_CONDITION"]
@@ -346,5 +350,6 @@ rule get_final_results:
         --output {params.output_dir} \
         --design {params.design} \
         --contrast_condition {params.contrast_condition} \
-        --reference_condition {params.reference_condition}
+        --reference_condition {params.reference_condition} \
+        --plot_output {params.plot_output_dir}
         """
