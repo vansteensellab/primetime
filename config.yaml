@@ -1,0 +1,61 @@
+################################################################################
+# Primetime: TF reporter pipeline
+# Vinícius H. Franceschini-Santos, Max Trauernicht 
+# =============================================================================
+# ============================ Config file  ===================================
+# =============================================================================
+
+#==============================================================================
+INPUT_DATA:
+  U2OS_DMSO_12W:
+    is_pdna: False
+    condition: DMSO
+    fastq: 
+      - test_data/U2OS_DMSO_1.fastq.gz
+      - test_data/U2OS_DMSO_2.fastq.gz
+      - test_data/U2OS_DMSO_3.fastq.gz
+
+  U2OS_Calcitriol_12W:
+    is_pdna: False
+    condition: Calcitriol
+    fastq: 
+      - test_data/U2OS_calcitriol_1.fastq.gz
+      - test_data/U2OS_calcitriol_2.fastq.gz
+      - test_data/U2OS_calcitriol_3.fastq.gz
+
+  pDNA:
+    is_pdna: True
+    condition: None
+    fastq: 
+      - test_data/pDNA_1.fastq.gz
+# ==============================================================================
+COMPARATIVE_ANALYSIS:
+  REFERENCE_CONDITION: DMSO
+  CONTRAST_CONDITION: Calcitriol
+
+# =============================================================================
+OUTPUT_DIRECTORY: test_data_output
+
+
+
+# ==============================================================================
+# ============================ Pipeline parameters =============================
+PVALUE_THRESHOLD: 0.05
+
+
+# ==============================================================================
+# ============================ Library parameters ==============================
+# Number of barcodes per TF
+BARCODES_PER_TF: 5
+
+# Length of the barcodes
+BARCODE_LENGTH: 12
+
+# BC downstream sequence: this will be used to identify the barcodes in the fastq files
+BARCODE_DOWNSTREAM_SEQUENCE: CATCGTCGCATCCAAGAGGCTAGCTAACTA 
+
+# How many mismatches are allowed in the downstream sequence to identify the barcode?
+MAX_MISMATCH_DOWNSTREAM_SEQ: 3
+
+# Path to the barcode annotation file
+BARCODE_ANNOTATION_FILE: misc/bc_annotation_prime.csv
