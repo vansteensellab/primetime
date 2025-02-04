@@ -4,7 +4,12 @@
 
 - [**Introduction**](#introduction)
 - [**Installation**](#installation)
-- [**Configuration**](#configuration)
+- [**Setting up your configuration file**](#setting-up-your-configuration-file)
+  - [**Setting up the input files**](#setting-up-the-input-files)
+  - [**Setting up the conditions for the comparative analysis**](#setting-up-the-conditions-for-the-comparative-analysis)
+  - [**Setting up the output directory**](#setting-up-the-output-directory)
+  - [**Optional: Changing the p-value threshold**](#optional-changing-the-p-value-threshold)
+  - [**Optional: Changing the library information**](#optional-changing-the-library-information)
 - [**Output Files**](#output-files)
 
 # Introduction
