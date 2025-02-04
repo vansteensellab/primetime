@@ -271,7 +271,7 @@ rule get_activity_and_qc_plots:
         activity = os.path.join(output_dir, "MPRAnalyze/activity.txt"),
         corrected_activity = os.path.join(output_dir, "MPRAnalyze/corrected_activity.txt")
     params:
-        script=os.path.join(scripts_dir, "get_activity_and_qc_plots.R"),
+        script=os.path.join(scripts_dir, "get_activity_and_qc_plots_bleedthrough_on_activity.R"),
         df_basedir=os.path.join(output_dir, "barcode_counts/per_sample"),
         plots_basedir=os.path.join(output_dir, "qc_plots/"),
         MPRAnalyze_basedir = os.path.join(output_dir, "MPRAnalyze")
