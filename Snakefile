@@ -300,14 +300,14 @@ rule run_MPRAnalyze:
         txt = os.path.join(output_dir, "results/primetime_results.txt"),
         plots = os.path.join(output_dir, "results/primetime_volcano.pdf")
     params:
-        script=os.path.join(scripts_dir, "run_comparative_analysis.R"),
+        script=os.path.join(scripts_dir, "run_comparative_analysis_bcalm.R"),
         out_basedir=os.path.join(output_dir, "MPRAnalyze"),
         pval_threshold=config["PVALUE_THRESHOLD"],
         plot_output_dir=os.path.join(output_dir, "results"),
         contrast_condition=config["COMPARATIVE_ANALYSIS"]["CONTRAST_CONDITION"],
         reference_condition=config["COMPARATIVE_ANALYSIS"]["REFERENCE_CONDITION"]
     conda:
-        os.path.join(conda_envs_dir, "mpranalyze.yaml")
+        os.path.join(conda_envs_dir, "comparative_analysis.yaml")
     threads: 100
     shell:
         """

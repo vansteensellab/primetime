@@ -10,6 +10,7 @@
   - [**Setting up the output directory**](#setting-up-the-output-directory)
   - [**Optional: Changing the p-value threshold**](#optional-changing-the-p-value-threshold)
   - [**Optional: Changing the library information**](#optional-changing-the-library-information)
+- [**Running primetime**](#running-primetime)
 - [**Output Files**](#output-files)
 
 # Introduction
@@ -116,6 +117,15 @@ BARCODE_DOWNSTREAM_SEQUENCE: CATCGTCGCATCCAAGAGGCTAGCTAACTA
 MAX_MISMATCH_DOWNSTREAM_SEQ: 3
 BARCODE_ANNOTATION_FILE: misc/bc_annotation_prime.csv
 ```
+
+# Running **primetime**
+
+After setting up your configuration file, you can run **primetime** with snakemake. 
+
+```sh
+snakemake --configfile <your_config.yaml> --use-conda --cores 10 --printshellcmds
+```
+
 
 # Output Files
 

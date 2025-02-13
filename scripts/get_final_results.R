@@ -159,20 +159,20 @@ ggplot() +
 #  Now, the MA plot
 ggplot(df_MA, aes(y = logFC, x = log_activity, color = sig, alpha = sig)) +
     geom_point() +
-    scale_color_manual(values = c("NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80"), name = "") +
+    scale_color_manual(values = c("NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80"), name = "") +
     scale_alpha_manual(values = c("NS" = 0.5, "Upregulated" = 1, "Downregulated" = 1), name = "") +
     geom_label_repel(
         data = df_MA_up,
         mapping = aes(label = tf, y = logFC, x = log_activity),
         box.padding = 1,
-        color = "#6495ed"
+        color = "#f37f80"
     ) +
     geom_label_repel(
         data = df_MA_down,
         mapping = aes(label = tf, y = logFC, x = log_activity),
         box.padding =0.5,
         max.overlaps = Inf,
-        color = "#f37f80"
+        color = "#6495ed"
     ) +
     geom_label_repel(
         data = df_MA_ns,
@@ -224,13 +224,13 @@ message("==== Creating lollipop plot")
                 color = sig
             ), size = 1) +
             scale_color_manual(
-                values = c("NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80"),
+                values = c("NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80"),
                 name = "Result of\nComparative\nAnalysis"
             ) +
             new_scale_color() +
             geom_point(aes(x = tf, y = !!sym(opt$reference_condition), color = "C"), size = 3) +
             geom_point(aes(x = tf, y = !!sym(opt$contrast_condition), color = sig), size = 3) +
-            scale_color_manual(values = c('C'= "black", "NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80")) +
+            scale_color_manual(values = c('C'= "black", "NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80")) +
             guides(color = F) +
             theme_bw() +
             theme(

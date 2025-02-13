@@ -57,6 +57,9 @@ option_list <- list(
 opt <- parse_args(OptionParser(option_list = option_list))
 df = read.table(opt$mpra_results, header = T)
 
+reference_condition <- opt$reference_condition
+contrast_condition <- opt$contrast_condition
+
 # The corrected activity will serve just to filter out the negative controls
 aux_df = read.table(opt$corrected_activity, header = T) %>%
     select(tf, negative_control) %>%
@@ -67,20 +70,16 @@ pdf(
 )
 message("==== Creating lollipop plot")
        df %>%
-           mutate(
-               ref = log2(!!sym(opt$reference_condition)),
-               contrast = log2(!!sym(opt$contrast_condition))
-           ) %>%
            inner_join(aux_df, by = "tf") %>%
            filter(!negative_control) %>%
-           mutate(color_axis = ifelse(sig == "Downregulated", "#f37f80",
+           mutate(color_axis = ifelse(sig == "Upregulated", "#f37f80",
                ifelse(sig == "NS", "gray30",
                    "#6495ed"
                )
            )) %>%
            # Remove duplicates
            distinct(tf, .keep_all = T) %>%
-           arrange(desc(ref)) %>%
+           arrange(desc(!!sym(reference_condition))) %>%
            mutate(tf = factor(tf, levels = unique(tf))) -> plot_df
 
 print(plot_df)
@@ -88,19 +87,19 @@ print(plot_df)
         plot_df %>%
             ggplot() +
             geom_segment(aes(
-                y = ref, 
-                yend = contrast,
+                y = !!sym(reference_condition), 
+                yend = !!sym(contrast_condition),
                 x = tf, xend = tf,
                 color = sig
             ), size = 1) +
             scale_color_manual(
-                values = c("NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80"),
+                values = c("NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80"),
                 name = "Result of\nComparative\nAnalysis"
             ) +
             new_scale_color() +
-            geom_point(aes(x = tf, y = ref, color = "C"), size = 3) +
-            geom_point(aes(x = tf, y = contrast, color = sig), size = 3) +
-            scale_color_manual(values = c('C'= "black", "NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80")) +
+            geom_point(aes(x = tf, y = !!sym(reference_condition), color = "C"), size = 3) +
+            geom_point(aes(x = tf, y = !!sym(contrast_condition), color = sig), size = 3) +
+            scale_color_manual(values = c('C'= "black", "NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80")) +
             guides(color = "none") +
             theme_bw() +
             theme(
@@ -116,6 +115,6 @@ print(plot_df)
             labs(
                 y = "Activity (log2(RPM+1))",
                 x = "",
-                title= paste(opt$contrast_condition, "vs.", opt$reference_condition)
+                title= paste(contrast_condition, "vs.", reference_condition)
             )
 invisible(dev.off())

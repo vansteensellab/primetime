@@ -414,7 +414,7 @@ parsed_results %>%
         geom_vline(xintercept = 0, linetype = "dashed", color = "grey") +
         geom_point() +
         # sig will be tab-blue
-        scale_color_manual(values = c("NS" = "grey", "Upregulated" = "#6495ed", "Downregulated" = "#f37f80")) +
+        scale_color_manual(values = c("NS" = "grey", "Downregulated" = "#6495ed", "Upregulated" = "#f37f80")) +
         scale_alpha_manual(values = c("NS" = 0.4, "Upregulated" = 1, "Downregulated" = 1)) +
         ggpubr::theme_pubr(border = T) +
         # annotate the significant points
