@@ -1,4 +1,5 @@
-theme: just-the-docs
+theme: jekyll-theme-minimal
+show_downloads: true
 logo: "/misc/logo.png"
 # Supports true (default) or false
 search_enabled: true
