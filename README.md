@@ -134,17 +134,17 @@ snakemake --configfile <your_config.yaml> --use-conda --cores 10 --printshellcmd
 
 ### 1. **Quality Check outputs**
 Inside the `primetime_QC` folder, several QC plots will be placed: 
-    - `barcode_correlations.pdf`: correlation of Log2(cDNA/pDNA) for different barcodes of each replicate.
-    - `replicate_correlations.pdf`: correlation of Log2(cDNA/pDNA) -- after averaging the different barcodes -- for each sample.
-    - `bleedthrough_estimation.pdf`: estimation of the ammount of pDNA bleedthough (percentage of cDNA counts coming from pDNA) for each replicate.
-    - `distribution_of_BC_counts.pdf`: distribution of the counts from all the barcodes of each replicate.
-    - `expected_vs_observed_pDNA_counts.pdf`: correlation of your pDNA counts (observed) with the ones of our lab (expected).
-    - `read_counts.pdf`: total amount of reads coming from each replicate.
+- `barcode_correlations.pdf`: correlation of Log2(cDNA/pDNA) for different barcodes of each replicate.
+- `replicate_correlations.pdf`: correlation of Log2(cDNA/pDNA) -- after averaging the different barcodes -- for each sample.
+- `bleedthrough_estimation.pdf`: estimation of the ammount of pDNA bleedthough (percentage of cDNA counts coming from pDNA) foeach replicate.
+- `distribution_of_BC_counts.pdf`: distribution of the counts from all the barcodes of each replicate.
+- `expected_vs_observed_pDNA_counts.pdf`: correlation of your pDNA counts (observed) with the ones of our lab (expected).
+- `read_counts.pdf`: total amount of reads coming from each replicate.
 
 ### 2. **Main Results**
-    - `primetime_results/primetime_results.txt`: Main result file, containing the adjusted p-value and the fold-change values for each TF, as well as the activity of the TFs for each condition.
-    - `primetime_results/primetime_volcano.pdf`: Volcano plot of the differential activity results.
-    - `primetime_results/primetime_lollipop.pdf`: Lollipop plot showing the activity of each TF for both conditions, highlighting the differentially active ones.
+- `primetime_results/primetime_results.txt`: Main result file, containing the adjusted p-value and the fold-change values for eacTF, as well as the activity of the TFs for each condition.
+- `primetime_results/primetime_volcano.pdf`: Volcano plot of the differential activity results.
+- `primetime_results/primetime_lollipop.pdf`: Lollipop plot showing the activity of each TF for both conditions, highlighting thdifferentially active ones.
 
 ### Additional files
 **primetime** also saves some additional files in the `tmp_primetime` folder, such as the barcode counts, and the results of the barcode clustering.
