@@ -171,6 +171,7 @@ dependencies:
 - r-getopt=1.20.4=r44ha770c72_1
 - r-ggally=2.2.1=r44hc72bb7e_1
 - r-ggbeeswarm=0.7.2=r44hc72bb7e_2
+- r-ggnewscale=0.5.0=r44hc72bb7e_0
 - r-ggplot2=3.5.1=r44hc72bb7e_1
 - r-ggpubr=0.6.0=r44hc72bb7e_2
 - r-ggrepel=0.9.6=r44h93ab643_0

@@ -1,2 +1,3 @@
 .snakemake
-test_data_output
+test_data_output*
+scripts/deprecated*
