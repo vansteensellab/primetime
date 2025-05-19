@@ -116,6 +116,7 @@ BARCODE_LENGTH: 12
 BARCODE_DOWNSTREAM_SEQUENCE: CATCGTCGCATCCAAGAGGCTAGCTAACTA 
 MAX_MISMATCH_DOWNSTREAM_SEQ: 3
 BARCODE_ANNOTATION_FILE: misc/bc_annotation_prime.csv
+EXPECTED_PDNA_COUNTS: misc/expected_pDNA_counts.txt
 ```
 
 # Running **primetime**
@@ -131,30 +132,21 @@ snakemake --configfile <your_config.yaml> --use-conda --cores 10 --printshellcmd
 
 **primetime** generates several output files during its execution:
 
-1. **Quality Check Reports**:
-    - `reads_QC/multiqc_report.html`: MultiQC report summarizing the quality of the reads.
+### 1. **Quality Check outputs**
+Inside the `primetime_QC` folder, several QC plots will be placed: 
+    - `barcode_correlations.pdf`: correlation of Log2(cDNA/pDNA) for different barcodes of each replicate.
+    - `replicate_correlations.pdf`: correlation of Log2(cDNA/pDNA) -- after averaging the different barcodes -- for each sample.
+    - `bleedthrough_estimation.pdf`: estimation of the ammount of pDNA bleedthough (percentage of cDNA counts coming from pDNA) for each replicate.
+    - `distribution_of_BC_counts.pdf`: distribution of the counts from all the barcodes of each replicate.
+    - `expected_vs_observed_pDNA_counts.pdf`: correlation of your pDNA counts (observed) with the ones of our lab (expected).
+    - `read_counts.pdf`: total amount of reads coming from each replicate.
 
-2. **Barcode Counts**:
-    - `barcode_counts/per_sample/{sample}_{replicate}.txt`: Raw barcode counts.
-    - `barcode_counts/per_sample/{sample}_{replicate}.stats`: Statistics of barcode counts.
-    - `barcode_counts/per_sample/{sample}_{replicate}.cluster.txt`: Clustered barcode counts.
-    - `barcode_counts/per_sample/{sample}_{replicate}.cluster.annotated.txt`: Annotated barcode counts.
+### 2. **Main Results**
+    - `primetime_results/primetime_results.txt`: Main result file, containing the adjusted p-value and the fold-change values for each TF, as well as the activity of the TFs for each condition.
+    - `primetime_results/primetime_volcano.pdf`: Volcano plot of the differential activity results.
+    - `primetime_results/primetime_lollipop.pdf`: Lollipop plot showing the activity of each TF for both conditions, highlighting the differentially active ones.
 
-3. **Design File**:
-    - `design.txt`: Design file containing sample, replicate, pDNA, and treatment information.
-
-4. **Activity and QC Plots**:
-    - `qc_plots/barcode_correlations.pdf`: QC plots showing barcode correlations.
-    - `MPRAnalyze/cDNA_counts.txt`: cDNA counts.
-    - `MPRAnalyze/pDNA_counts.txt`: pDNA counts.
-    - `MPRAnalyze/activity.txt`: Activity counts.
-    - `MPRAnalyze/corrected_activity.txt`: Corrected activity counts.
-
-5. **MPRAnalyze Results**:
-    - `results/primetime_results.txt`: Differential TF activity results.
-    - `results/primetime_volcano.pdf`: Volcano plot of the differential activity results.
-
-6. **Final Results**:
-    - `results/primetime_lollipop.pdf`: Lollipop plot of the final results.
+### Additional files
+**primetime** also saves some additional files in the `tmp_primetime` folder, such as the barcode counts, and the results of the barcode clustering.
 
 These files provide a comprehensive overview of the TF activity analysis and can be used for further downstream analysis.
