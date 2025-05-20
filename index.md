@@ -1,6 +1,9 @@
 ---
 title: Home
 layout: home
+nav_order: 1
+description: "Automated pipeline for detection of TF activity from barcoded reporters"
+permalink: /
 ---
 
 <p align="center"><img src="img/logo.png" alt="primetime" width="80%"></p>
