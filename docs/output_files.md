@@ -21,8 +21,9 @@ Inside the `primetime_QC` folder, several QC plots will be placed.
 | `read_counts.pdf`                       | Total amount of reads coming from each replicate.                                                             |
 
 ### 2. **Main Results**
-| File Name                                         | Description                                                                                                               |
-|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+
+| File Name| Description|
+|----------|------------|
 | `primetime_results/primetime_results.txt`         | Main result file containing adjusted p-values, fold-change values for each TF, and TF activity for each condition.        |
 | `primetime_results/primetime_volcano.pdf`         | Volcano plot of the differential activity results.                                                                        |
 | `primetime_results/primetime_lollipop.pdf`        | Lollipop plot showing the activity of each TF for both conditions, highlighting the differentially active ones.           |
