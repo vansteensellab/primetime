@@ -5,9 +5,11 @@ nav_order: 4
 
 # Output Files
 
-**primetime** generates several output files during its execution:
+**primetime** generates several output files during its execution. All the plots for QC are stored in the `primetime_QC` folder. Then the main result of **primetime** containing the activity and fold-change values is stored in the `primetime_results` folder, together with some additional plots.
 
-### 1. **Quality Check outputs**
+Bellow we list all the QC and results files with a brief description.
+
+## 1. Quality Check outputs
 
 Inside the `primetime_QC` folder, several QC plots will be placed.
 
@@ -20,15 +22,16 @@ Inside the `primetime_QC` folder, several QC plots will be placed.
 | `expected_vs_observed_pDNA_counts.pdf`  | Correlation of your pDNA counts (observed) with the ones of our lab (expected).                               |
 | `read_counts.pdf`                       | Total amount of reads coming from each replicate.                                                             |
 
-### 2. **Main Results**
+## 2. Main Results
 
 | File Name| Description|
 |----------|------------|
-| `primetime_results/primetime_results.txt`         | Main result file containing adjusted p-values, fold-change values for each TF, and TF activity for each condition.        |
-| `primetime_results/primetime_volcano.pdf`         | Volcano plot of the differential activity results.                                                                        |
-| `primetime_results/primetime_lollipop.pdf`        | Lollipop plot showing the activity of each TF for both conditions, highlighting the differentially active ones.           |
+| `primetime_results.txt`         | Main result file containing adjusted p-values, fold-change values for each TF, and TF activity for each condition.        |
+| `primetime_volcano.pdf`         | Volcano plot of the differential activity results.                                                                        |
+| `primetime_lollipop.pdf`        | Lollipop plot showing the activity of each TF for both conditions, highlighting the differentially active ones.           |
 
-{: .note } Click here to read a deeper description on the expecter outcomes of **primetime**.
+{: .note }
+Click here to read a deeper description on the expecter outcomes of **primetime**.
 
 ### Additional files
 **primetime** also saves some additional files in the `tmp_primetime` folder, such as the barcode counts, and the results of the barcode clustering.
