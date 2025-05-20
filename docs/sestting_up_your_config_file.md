@@ -15,7 +15,7 @@ nav_order: 3
 Before running the **primetime**, you need to change the parameters on the `config.yaml` according to your data. Below, we will use our test data (that is meant to access the changes on TF activity on U2OS cells uppon calcitriol treatment) to guide you through the different sections of the configuration file and how to set them up:
 
 
-{: .note} The configuration file is sensitive to the number of spaces before each field. Make sure the format of your file is the same as the examples we provide.
+{: .note } The configuration file is sensitive to the number of spaces before each field. Make sure the format of your file is the same as the examples we provide.
 
 ## Setting up the input files
 
@@ -80,7 +80,7 @@ PVALUE_THRESHOLD: 0.05
 
 There are some additional parameters on the config file related to the barcodes used in the analysis
 
-{: .note} Be aware that changing this parameters will impact the counting of the barcodes in the input reads. Only change this parameters if you know what you are doing.
+{: .note } Be aware that changing this parameters will impact the counting of the barcodes in the input reads. Only change this parameters if you know what you are doing.
 
 Example:
 ```yaml
