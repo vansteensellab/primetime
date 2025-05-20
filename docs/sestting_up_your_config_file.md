@@ -1,5 +1,6 @@
 ---
-
+title: Setting up your configuration file
+nav_order: 3
 ---
 
 # Setting up your configuration file
