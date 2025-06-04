@@ -89,8 +89,7 @@ rule all:
         ),
         expected_vs_obs=os.path.join(
             output_dir, "primetime_QC/expected_vs_observed_pDNA_counts.pdf"
-        ),
-        reads_qc=expand(path_to_fastqc),
+        )
 
 
 ################################################################################
