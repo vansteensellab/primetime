@@ -12,8 +12,6 @@ INPUT_DATA:
     condition: DMSO
     fastq: 
       - test_data/U2OS_DMSO_1.fastq.gz
-      - test_data/U2OS_DMSO_2.fastq.gz
-      - test_data/U2OS_DMSO_3.fastq.gz
 
   U2OS_calcitriol:
     is_pdna: False
@@ -35,7 +33,7 @@ COMPARATIVE_ANALYSIS:
   CONTRAST_CONDITION: Calcitriol
 
 # =============================================================================
-OUTPUT_DIRECTORY: test_data_output_pDNA_replicates
+OUTPUT_DIRECTORY: test_data_output_pDNA_no_bleed
 
 
 # ==============================================================================

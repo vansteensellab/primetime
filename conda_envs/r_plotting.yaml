@@ -152,6 +152,7 @@ dependencies:
 - r-ggsci=3.2.0=r44hc72bb7e_1
 - r-ggsignif=0.6.4=r44hc72bb7e_2
 - r-ggstats=0.7.0=r44hc72bb7e_0
+- r-ggthemes=5.1.0=r44hc72bb7e_1
 - r-globals=0.16.3=r44hc72bb7e_1
 - r-glue=1.8.0=r44h2b5f3a1_0
 - r-googledrive=2.1.1=r44hc72bb7e_2

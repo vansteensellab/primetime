@@ -1,7 +1,7 @@
 ################################################################################
 # Prime Time: TF reporter pipeline
 # Vinícius H. Franceschini-Santos, Max Trauernicht 2024-10-22
-# Version 0.5
+# Version 0.6.1
 # =============================================================================
 # Description:
 #
@@ -38,13 +38,15 @@
 #
 # =============================================================================
 # Versions:
-# 0.1 - Initial version
-# 0.2 - Model MRPAnalyze with promoter information
-# 0.3 - Use BCalm package; add bleedthrough slope as QC
-# 0.4 - Multiple pDNA replicates; Compare pDNA with expected; QC on activity
-# 0.5 - Add correlation with expected pDNA counts
+# 0.1.0 - Initial version
+# 0.2.0 - Model MRPAnalyze with promoter information
+# 0.3.0 - Use BCalm package; add bleedthrough slope as QC
+# 0.4.0 - Multiple pDNA replicates; Compare pDNA with expected; QC on activity
+# 0.5.0 - Add correlation with expected pDNA counts
+# 0.6.0 - Add barcode counts for top TFs
+# 0.6.1 - Show BC counts for ALL TFs instead of only top TFs
 # =============================================================================
-__version__ = "0.5"
+__version__ = "0.6.1"
 
 # Importing libraries
 import sys
@@ -89,7 +91,10 @@ rule all:
         ),
         expected_vs_obs=os.path.join(
             output_dir, "primetime_QC/expected_vs_observed_pDNA_counts.pdf"
-        )
+        ),
+        bc_counts_for_top_TFs=os.path.join(
+            output_dir, "primetime_results/BC_counts_for_top_TFs.pdf"
+        ),
 
 
 ################################################################################
@@ -336,4 +341,28 @@ rule run_comparative_analysis:
         --contrast_condition {params.contrast_condition} \
         --reference_condition {params.reference_condition} \
         --plot_output {params.plot_output_dir}
+        """
+
+
+# 6) Get barcode counts for the top-responding TFs
+rule get_bc_counts_for_top_tfs:
+    input:
+        txt=os.path.join(output_dir, "primetime_results/primetime_results.txt"),
+        design=os.path.join(output_dir, "tmp_primetime/design.txt"),
+        cdna=os.path.join(output_dir, "tmp_primetime/activity/cDNA_counts.txt"),
+    output:
+        os.path.join(output_dir, "primetime_results/BC_counts_for_top_TFs.pdf"),
+    params:
+        script=os.path.join(scripts_dir, "primetime_get_bc_counts_for_top_tfs.R"),
+        reference_condition=config["COMPARATIVE_ANALYSIS"]["REFERENCE_CONDITION"],
+    conda:
+        os.path.join(conda_envs_dir, "r_plotting.yaml")
+    shell:
+        """
+        Rscript {params.script} \
+        --result {input.txt} \
+        --design {input.design} \
+        --cdna {input.cdna} \
+        --output {output} \
+        --reference_condition {params.reference_condition}
         """
