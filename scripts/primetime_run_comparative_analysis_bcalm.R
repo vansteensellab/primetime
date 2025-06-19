@@ -5,7 +5,7 @@
 # ==============================================================================
 # Description:
 #
-# This script runs the MPRAnalyze analysis for the TF reporter data.
+# This script runs the BCalm analysis for the TF reporter data.
 # It reads the barcode counts, processes the data, and performs differential
 # TF activity analysis comparing different conditions of the samples.
 #
@@ -253,7 +253,7 @@ p_threshold <- opt$pval_threshold
 message(paste0("==== Applying signifficance thresholds: fdr <= ", p_threshold, "\n"))
 pdf(file.path(opt$plot_output, "primetime_volcano.pdf"), width = 10, height = 10)
 
-message("==== Writing MPRAnalyze results")
+message("==== Writing BCalm results")
 message("Reference condition:", opt$reference_condition)
 message("Contrast condition:", opt$contrast_condition)
 
