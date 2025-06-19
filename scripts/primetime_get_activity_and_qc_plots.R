@@ -551,7 +551,7 @@ counts_df %>%
     theme_pubr(border = T) +
     stat_cor(method = "pearson", size = 6) +
     ggtitle("Expected vs. observed pDNA counts per barcode") +
-    xlab("Read count (RPM)") +
-    ylab("Read count (RPM)") +
+    xlab("Observed pDNA read count (RPM)") +
+    ylab("Expected pDNA read count (RPM)") +
     theme(text = element_text(size = 18))
 invisible(dev.off())
