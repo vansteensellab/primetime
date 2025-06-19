@@ -33,7 +33,7 @@ COMPARATIVE_ANALYSIS:
   CONTRAST_CONDITION: Calcitriol
 
 # =============================================================================
-OUTPUT_DIRECTORY: test_data_output_pDNA_no_bleed
+OUTPUT_DIRECTORY: test_data_output_pDNA_v2
 
 
 # ==============================================================================
@@ -56,7 +56,7 @@ BARCODE_DOWNSTREAM_SEQUENCE: CATCGTCGCATCCAAGAGGCTAGCTAACTA
 MAX_MISMATCH_DOWNSTREAM_SEQ: 3
 
 # Path to the barcode annotation file
-BARCODE_ANNOTATION_FILE: misc/bc_annotation_prime.csv
+BARCODE_ANNOTATION_FILE: misc/bc_annotation_prime_v2.csv
 
 # Path to expected pDNA counts, to compare with as a QC
 EXPECTED_PDNA_COUNTS: misc/expected_pDNA_counts.txt
