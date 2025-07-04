@@ -67,7 +67,7 @@ inner_join(df, design_df, by = 'replicate') %>%
   mutate(tf_lbl = fct_inorder(tf_lbl)) -> plot_df
   
 
-pdf(opt$output, width=10, height=10)
+pdf(opt$output, width=20, height=20)
 plot_df %>%
 # plot
   ggplot(aes(x=replicate, y=read_count_RPM)) +
