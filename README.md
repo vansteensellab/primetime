@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16840674.svg)](https://doi.org/10.5281/zenodo.16840674)
+
 <p align="center"><img src="misc/logo.png" alt="primetime" width="80%"></p>
 
 # Table of contents
