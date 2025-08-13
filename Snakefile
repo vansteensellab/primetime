@@ -1,7 +1,7 @@
 ################################################################################
 # Prime Time: TF reporter pipeline
 # Vinícius H. Franceschini-Santos, Max Trauernicht 2024-10-22
-# Version 0.6.1
+# Version 1.0.0
 # =============================================================================
 # Description:
 #
@@ -35,18 +35,8 @@
 # 7) Save final results
 # Main final result is the primetime_results.txt file, which contains the list
 # of TFs with their corrected activity and p-values for the differential activity.
-#
 # =============================================================================
-# Versions:
-# 0.1.0 - Initial version
-# 0.2.0 - Model MRPAnalyze with promoter information
-# 0.3.0 - Use BCalm package; add bleedthrough slope as QC
-# 0.4.0 - Multiple pDNA replicates; Compare pDNA with expected; QC on activity
-# 0.5.0 - Add correlation with expected pDNA counts
-# 0.6.0 - Add barcode counts for top TFs
-# 0.6.1 - Show BC counts for ALL TFs instead of only top TFs
-# =============================================================================
-__version__ = "0.6.1"
+__version__ = "1.0.0"
 
 # Importing libraries
 import sys
